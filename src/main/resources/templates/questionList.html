@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.nz.net/thymeleaf/layout"
+        layout:decorate="~{layout}">
+
+<div layout:fragment="content" class="container my-3">
+<div  th:text="|${#lists.size(list)}개의 질문글이 있습니다.|"></div>
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>글 작성일</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="question, loop : ${list}">
+                <td th:text="${list.getTotalElements -(list.number * list.size) - loop.index}"></td>
+                <td>
+                    <a class="text-black" th:href="@{|/question/detail/${question.id}|}"  th:text="${question.subject}"></a>
+                    <span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) > 0}"
+                          th:text="${#lists.size(question.answerList)}"></span>
+                </td>
+                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--    페이징 처리    -->
+    <div th:if="${!list.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!list.hasPrevious} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${list.number-1}|}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="page : ${#numbers.sequence(0, list.totalPages-1)}" th:if="${page>=list.number-5 and page<=list.number+5}"
+                th:classappend="${page == list.number} ? 'active'" class="page-item">
+                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!list.hasNext} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${list.number+1}|}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--    /페이징 처리    -->
+
+    <a th:href="@{/question/register}" class="btn btn-primary">질문하기</a>
+
+
+</div>
+</html>

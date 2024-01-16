@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+
+
+
+</head>
+<body>
+<!--  nav바 템플릿 -->
+<nav th:replace="~{navbar::navbarFragment}"></nav>
+<!--  /nav바 템플릿 -->
+
+<!--  템플릿 바디 -->
+<th:block layout:fragment="content"/>
+<!--  /템플릿 바디 -->
+
+<script th:src="@{/bootstrap.min.js}"></script>
+
+</body>
+</html>
