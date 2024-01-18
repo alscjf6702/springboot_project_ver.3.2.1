@@ -17,12 +17,12 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/question")
+@RequestMapping
 public class QuestionController {
 
     private final QuestionService questionService;
 
-    @GetMapping("/list")
+    @GetMapping("/question/list")
     public String list(Model model,@RequestParam(value="page",defaultValue = "1") int page){
 //        List<Question> questionList = questionService.getList();
         Page<Question> questionList = questionService.getList(page);
@@ -30,18 +30,18 @@ public class QuestionController {
         return "questionList";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/question/detail/{id}")
     public String detail(Model model, @PathVariable("id")Integer id, AnswerForm answerForm){
         model.addAttribute("one", questionService.detail(id));
         return "questionDetail";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/question/register")
     public String registerGet(QuestionForm questionForm){
         return "questionRegister";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/question/register")
     public String registerPost(@Valid QuestionForm questionForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "questionRegister";
@@ -50,13 +50,13 @@ public class QuestionController {
         return "redirect:/question/list";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/question/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         questionService.delete(id);
         return "redirect:/question/list";
     }
 
-    @GetMapping("")    //root URL localhost:8080으로 접속했을 때 list화면으로 redirect해준다
+    @GetMapping("/")    //root URL localhost:8080으로 접속했을 때 list화면으로 redirect해준다
     public String root(){
         return "redirect:/question/list";
     }
