@@ -1,5 +1,7 @@
-❗목표 : 스프링부트, springSecurity 제일 최신버전으로 웹 개발 해보기
-🔗 QnA게시판, 공지사항 게시판, 회원가입, 로그인, 쇼핑몰 등 구현 예정
+❗목표 : 스프링부트, springSecurity 제일 최신버전으로 웹 사이트 구현 해보기<br>
+
+✔️ 현재 구현 완료 : QnA게시판, 회원가입  <br>
+✖️ 추가 구현 예정 : 로그인(SNS로그인), 쇼핑몰 , 공지사항 게시판 , 카카오 실시간 상담, 결제, 후기등록 등 
 <hr>
 🔴스프링부트 : 3.2.1<br>
 🔵라이브러리 : lombok, Junit5, SpringData JPA, thymeleaf, validation, springSecurity6<br>
